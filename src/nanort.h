@@ -74,7 +74,8 @@ namespace nanort {
 template <typename T, size_t stack_capacity>
 class StackAllocator : public std::allocator<T> {
 public:
-  typedef typename std::allocator<T>::pointer pointer;
+//  typedef typename std::allocator<T>::pointer pointer;
+  typedef typename std::allocator<T>::value_type *pointer;
   typedef typename std::allocator<T>::size_type size_type;
 
   // Backing store for the allocator. The container owner is responsible for
@@ -139,7 +140,7 @@ public:
       source_->used_stack_buffer_ = true;
       return source_->stack_buffer();
     } else {
-      return std::allocator<T>::allocate(n, hint);
+      return std::allocator<T>::allocate(n);
     }
   }
 
@@ -255,8 +256,7 @@ private:
 //   foo[0] = 10;         // as well as operator[]
 template <typename T, size_t stack_capacity>
 class StackVector
-    : public StackContainer<std::vector<T, StackAllocator<T, stack_capacity> >,
-                            stack_capacity> {
+    : public StackContainer<std::vector<T, StackAllocator<T, stack_capacity>>, stack_capacity> {
 public:
   StackVector()
       : StackContainer<std::vector<T, StackAllocator<T, stack_capacity> >,
@@ -975,7 +975,8 @@ bool FindCutFromBinBuffer(float *cutPos,    // [out] xyz
   return true;
 }
 
-class SAHPred : public std::unary_function<unsigned int, bool> {
+//class SAHPred : public std::unary_function<unsigned int, bool> {
+class SAHPred {
 public:
   SAHPred(int axis, float pos, const float *vertices, const unsigned int *faces)
       : axis_(axis), pos_(pos), vertices_(vertices), faces_(faces) {}

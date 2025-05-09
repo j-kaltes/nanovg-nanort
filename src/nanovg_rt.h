@@ -223,7 +223,7 @@ int inline fasterfloor(const float x) {
   return y;
 }
 
-inline float lerp(float x, float y, float t) { return x + t * (y - x); }
+inline float mylerp(float x, float y, float t) { return x + t * (y - x); }
 
 // bool myisnan(float a) {
 //  volatile float d = a;
@@ -247,8 +247,8 @@ inline void FilterByteLerp(float *rgba, const unsigned char *image, int i00,
     }
 
     for (int i = 0; i < 4; i++) {
-      rgba[i] = lerp(lerp(texel[0][i], texel[1][i], dx),
-                     lerp(texel[2][i], texel[3][i], dx), dy);
+      rgba[i] = mylerp(mylerp(texel[0][i], texel[1][i], dx),
+                     mylerp(texel[2][i], texel[3][i], dx), dy);
     }
 
   } else {
@@ -262,7 +262,7 @@ inline void FilterByteLerp(float *rgba, const unsigned char *image, int i00,
 
     for (int i = 0; i < stride; i++) {
       rgba[i] = texel[0][i]; // NEAREST
-      // rgba[i] = lerp(lerp(texel[0][i], texel[1][i], dx), lerp(texel[2][i],
+      // rgba[i] = mylerp(mylerp(texel[0][i], texel[1][i], dx), mylerp(texel[2][i],
       // texel[3][i], dx), dy);
     }
   }
@@ -291,8 +291,8 @@ inline void FilterFloatLerp(float *rgba, const float *image, int i00, int i10,
     }
 
     for (int i = 0; i < 4; i++) {
-      rgba[i] = lerp(lerp(texel[0][i], texel[1][i], dx),
-                     lerp(texel[2][i], texel[3][i], dx), dy);
+      rgba[i] = mylerp(mylerp(texel[0][i], texel[1][i], dx),
+                     mylerp(texel[2][i], texel[3][i], dx), dy);
     }
 
   } else {
@@ -305,8 +305,8 @@ inline void FilterFloatLerp(float *rgba, const float *image, int i00, int i10,
     }
 
     for (int i = 0; i < stride; i++) {
-      rgba[i] = lerp(lerp(texel[0][i], texel[1][i], dx),
-                     lerp(texel[2][i], texel[3][i], dx), dy);
+      rgba[i] = mylerp(mylerp(texel[0][i], texel[1][i], dx),
+                     mylerp(texel[2][i], texel[3][i], dx), dy);
     }
   }
 

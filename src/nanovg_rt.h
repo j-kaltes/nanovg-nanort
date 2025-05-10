@@ -223,7 +223,13 @@ int inline fasterfloor(const float x) {
   return y;
 }
 
-inline float mylerp(float x, float y, float t) { return x + t * (y - x); }
+#if __cplusplus>=202002L
+#define mylerp        std::lerp
+#else
+inline float mylerp(float x, float y, float t) { 
+     return x + t * (y - x); 
+     }
+#endif
 
 // bool myisnan(float a) {
 //  volatile float d = a;

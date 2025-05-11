@@ -5981,6 +5981,7 @@ static void stbi__hdr_convert(float *output, stbi_uc *input, int req_comp)
       float f1;
       // Exponent
       f1 = (float) ldexp(1.0f, input[3] - (int)(128 + 8));
+    //  f1 = (float) exp2<int>(input[3] - (int)(128 + 8));
       if (req_comp <= 2)
          output[0] = (input[0] + input[1] + input[2]) * f1 / 3;
       else {

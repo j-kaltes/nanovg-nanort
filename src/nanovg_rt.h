@@ -2345,7 +2345,7 @@ error:
 static void rtnvg__renderTriangles(void *uptr, NVGpaint *paint,
                                    NVGcompositeOperationState compositeOperation,
                                    NVGscissor *scissor, const NVGvertex *verts,
-                                   int nverts) {
+                                   int nverts,float fringeWidge) {
   // printf("renderTriangles\n");
   RTNVGcontext *rt = (RTNVGcontext *)uptr;
   RTNVGcall *call = rtnvg__allocCall(rt);
